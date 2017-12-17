@@ -12,7 +12,7 @@ angular.module('OwlAdmin', [
   'ngResource',
   'LocalStorageModule',
   // Modules
-  //'mynt.service',
+  'mynt.service',
   'OwlAdmin.theme',
   'OwlAdmin.pages',
   '19degrees.ngSweetAlert2'
