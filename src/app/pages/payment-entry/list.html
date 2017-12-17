@@ -1,0 +1,99 @@
+<div class="widgets">
+  <div class="row">
+      <div class="col-md-12">
+        <div ba-panel ba-panel-title="Payment Entry List" ba-panel-class="with-scroll">
+          <div class="horizontal-scroll">
+            <button type="button" ng-click="vm.getPayments()" class="btn btn-primary btn-xs pull-right refresh-sm" style="margin-right: 10px;"><span class="fa fa-refresh"></span></button>
+            <div class="form-group select-page-size-wrap ">
+            </div>
+            <table class="table" st-pipe="vm.getPayments" st-table="vm.payments">
+              <thead>
+              <tr class="sortable ">
+                <th width="9%" class="table-id" st-sort="merchantProfile.name">Merchant Name</th>
+                <th width="9%" st-sort="subscriberMobTel">Subscriber Mobtel</th>
+                <th width="6%" st-sort="requestDate" st-sort-default="reverse">Requested date</th>
+                <th width="6%" st-sort="fulfillDate">Fulfill date</th>
+                <th width="20%"st-sort="paymentMethod">Method</th>
+                <th width="25%"st-sort="paymentStatus">Status</th>
+                <th width="9%"st-sort="amount">Details</th>
+                <th width="16%"></th>
+              </tr>
+              <tr>
+                <th><input st-search="merchantName" placeholder="Merchant" class="input-sm form-control search-input"
+                           type="search"/></th>
+                <th><input st-search="subscriberMobTel" placeholder="Subscriber Mobtel" class="input-sm form-control search-input"
+                           type="search"/></th>
+                <th></th>
+                <th></th>
+                <th>
+                  <select ng-options="method.value as method.label for method in vm.paymentMethods" ng-model="vm.filters.paymentMethod" ng-change="vm.getPayments()" placeholder="Filter by Method" class="form-control">
+                    <option value="">Any</option>
+                  </select>
+                </th>
+                <th>
+                  <select ng-options="status.value as status.label for status in vm.paymentStatuses" ng-model="vm.filters.paymentStatus" ng-change="vm.getPayments()" placeholder="Filter by Status" class="form-control">
+                    <option value="">Any</option>
+                  </select>
+                </th>
+                <th></th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="payment in vm.payments">
+                <td class="table-id">{{payment.merchantProfile.name}}</td>
+                <td>{{payment.subscriberMobTel}}</td>
+                <td>
+                    {{payment.requestDate | date}}
+                    <div class="text-muted"><small>{{payment.requestDate | date: 'h:mm a'}}</small></div>
+                </td>
+                <td>
+                    {{payment.fulfillDate | date}}
+                    <div class="text-muted"><small>{{payment.fulfillDate | date: 'h:mm a'}}</small></div>
+                </td>
+                <td>{{payment.paymentMethod | displayPaymentMethods}}</td>
+                <td>{{payment.paymentStatus | displayPaymentStatus}}</td>
+                <td style="font-size: 0.8em;">
+                  <table class="table table-striped">
+                    <tr><th style="width: 50px;">Amount</th><td>{{(payment.amount.total || payment.amount) | currency: 'Php'}}</td></tr>
+                    <tr><th style="width: 50px;">Merchant Reference</th><td>{{payment.transactionReference}}</td></tr>
+                  </table>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-xs" ui-sref="payment-entry-details({paymentToken: payment.paymentToken})">View details</button>
+                  <!-- div class="btn-group" uib-dropdown dropdown-append-to-body>
+                    <button type="button" class="btn btn-primary btn-xs" ui-sref="payment-entry-details({paymentToken: payment.paymentToken})">View details</button>
+                    <button type="button" class="btn btn-primary btn-xs" uib-dropdown-toggle>
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul uib-dropdown-menu>
+                      <li><a ui-sref="policy.settlement({policyNo: policy.policyNumber})">View Settlement Details</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a ui-sref="policy.crtreceipt({policyNo: policy.policyNumber})">New Cash Receipt</a></li>
+                      <li><a ui-sref="policy.audit({policyNo: policy.policyNumber})">Policy Audit History</a></li>
+                    </ul>
+                  </div-->
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="7" class="text-center">
+                  <div st-pagination="" st-template="app/pages/components/smart-table/pagination.html" st-items-by-page="vm.tablePageSize" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="text-muted">Showing {{vm.payments.length}} of {{vm.totalElements}}</div>
+          <button type="button" class="btn btn-primary btn-xs pull-right" ng-click="vm.exportPolicies()">Export to Excel</button>
+          <label class="pull-right" style="margin-right: 10px;">
+            <select class="form-control selectpicker show-tick" style="height: 30px; line-height: 14px;" title="Rows on page" selectpicker
+                    ng-model="vm.tablePageSize" ng-options="i for i in [1,5,10,15,20,25]">
+            </select>
+          </label>
+      </div>
+    </div>
+  </div>
+</div>

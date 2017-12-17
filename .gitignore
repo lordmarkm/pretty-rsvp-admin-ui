@@ -1,22 +1,61 @@
-# Compiled class file
-*.class
+node_modules
+dist
+.tmp
+bower_components
+test/bower_components
 
-# Log file
+# generated files
+target
+webapp-build
+generated
+overlays
+id_file
+selenium_standalone_*
 *.log
+paho*
+src/app/services/config.js
+src/assets/js/auth.js
 
-# BlueJ files
-*.ctxt
+# generated files frontend
+bower_components
+node_modules
+libs
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Eclipse Ignores
+.classpath
+.project
+.settings
+.metadata
+.checkstyle
+*.eclipse.jdt.core.prefs
 
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# IDEA Ignores
+*.iml
+*.ipr
+*.iws
+.idea
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Generated File Repositories
+temp
+terminal
+
+# MAC ignores
+.DS_Store
+main-built.js
+/nlic-app/nlic-repository/
+/nlic-app/nlic-repository-temp
+log/
+
+#android ignores
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+#orig files
+*.orig

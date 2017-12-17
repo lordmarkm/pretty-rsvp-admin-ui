@@ -1,0 +1,237 @@
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-6">
+            <div
+                    ba-panel
+                    ba-panel-title="Merchant Profile Details"
+                    ba-panel-class="profile-page">
+                <div class="row">
+                    <form ng-submit="vm.saveMerchant()">
+                        <div class="col-md-12">
+                            <h3 class="with-line">Merchant Information</h3>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row clearfix">
+                                        <label class="col-sm-4 control-label">Merchant Picture</label>
+
+                                        <div class="col-sm-8">
+                                            <div class="merchantpic">
+                                                <div class="merchantpic-wrapper">
+                                                    <img ng-src="{{ picture }}" ng-click="uploadPicture()">
+                                                </div>
+                                                <i class="ion-ios-close-outline" ng-click="removePicture()"
+                                                   ng-if="!noPicture"></i>
+                                                <a href class="change-merchantpic" ng-click="uploadPicture()">Change
+                                                    Merchant Picture</a>
+                                                <input type="file" ng-show="false" id="uploadFile"
+                                                       ng-file-select="onFileSelect($files)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row clearfix">
+                                        <label class="col-sm-4 control-label">Active</label>
+
+                                        <div class="col-sm-8">
+                                            <ba-switcher switcher-style="primary" on="YES" off="NO"
+                                                         switcher-value="vm.merchant.active"></ba-switcher>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row clearfix">
+                                        <label for="merchantCode" class="col-sm-4 control-label">
+                                            <span class="required">Merchant Code</span>
+                                        </label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="merchantCode" placeholder=""
+                                                   ng-model="vm.merchant.merchantCode" required>
+                                            <small class="text-muted">Must be unique</small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row clearfix">
+                                        <label for="merchantName" class="col-sm-4 control-label">
+                                            <span class="required">Merchant Name</span>
+                                        </label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="merchantName" placeholder=""
+                                                   ng-model="vm.merchant.name" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row clearfix">
+                                        <label for="merchantSalt" class="col-sm-4 control-label">
+                                            <span>Merchant Salt</span>
+                                        </label>
+
+                                        <div class="col-sm-8">
+                                            <p class="form-control" id="merchantSalt">{{ vm.merchant.merchantSalt }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row clearfix">
+                                        <label for="password" class="col-sm-4 control-label">
+                                            <span class="required">Password</span>
+                                        </label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="password" placeholder=""
+                                                   ng-model="vm.merchant.password" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row clearfix">
+                                        <label for="host" class="col-sm-4 control-label">
+                                            <span class="required">Host</span>
+                                        </label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="host" placeholder=""
+                                                   ng-model="vm.merchant.merchantNotification.host" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row clearfix">
+                                        <label for="port" class="col-sm-4 control-label">
+                                            <span class="required">Port</span>
+                                        </label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="port" placeholder=""
+                                                   ng-model="vm.merchant.merchantNotification.port" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row clearfix">
+                                        <label for="path" class="col-sm-4 control-label">
+                                            <span class="required">Path</span>
+                                        </label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="path" placeholder=""
+                                                   ng-model="vm.merchant.merchantNotification.path" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="with-line">Merchant Settings</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row clearfix">
+                                        <div class="col-md-12">
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="col-sm-8">{{vm.settings.otp.code}}</label>
+                                                        <div class="col-sm-4">
+                                                            <ba-switcher switcher-style="primary" on="YES" off="NO"
+                                                                         switcher-value="vm.settings.otp.value"></ba-switcher>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="col-sm-8">{{vm.settings.blocking.code}}</label>
+                                                        <div class="col-sm-4">
+                                                            <ba-switcher switcher-style="primary" on="YES" off="NO"
+                                                                         switcher-value="vm.settings.blocking.value"></ba-switcher>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="with-line">Merchant Permissions</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row clearfix">
+                                        <div class="col-sm-12">
+                                            <table>
+                                                <tr ng-repeat="permission in vm.permissions">
+                                                    <td>
+                                                        <label class="col-sm-8">{{permission.label}}</label>
+                                                        <div class="col-sm-4">
+                                                            <ba-switcher switcher-style="primary" on="YES" off="NO"
+                                                                         switcher-value="permission.active"></ba-switcher>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-with-icon pull-right">
+                                <i class="ion-android-checkmark-circle"></i>Update Merchant
+                            </button>
+                            <button type="button" class="btn btn-primary pull-right refresh mr5" ng-click="vm.reload()">
+                                <i class="fa fa-refresh"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div
+                    ba-panel
+                    ba-panel-title="Merchant Wallet Details"
+                    ba-panel-class="profile-page">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="with-line">Merchant Wallet List</h3>
+
+                        <table class="table" style="table-layout: fixed" st-pipe="vm.getWalletList" st-table="vm.getWalletList">
+                            <thead>
+                                <tr class="sortable">
+                                    <th width="15%" style="text-align: left" st-sort="walletId" st-sort-default="true">ID</th>
+                                    <th width="25%" st-sort="walletName">Name</th>
+                                    <th width="20%" st-sort="walletType">Type</th>
+                                    <th width="20%">Details</th>
+                                    <th width="20%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="!vm.walletList.length">
+                                    <td colspan="7">No records found</td>
+                                </tr>
+                                <tr ng-repeat="wallet in vm.walletList">
+                                    <td class="table-id">
+                                        <div>{{ wallet.walletId }}</div>
+                                    </td>
+                                    <td>{{ wallet.walletName }}</td>
+                                    <td>{{ wallet.walletType }}</td>
+                                    <td>
+                                        <div ng-if="wallet.active" class="label label-success">Active</div>
+                                        <div ng-if="!wallet.active" class="label label-warning">Inactive</div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning btn-xs" title="Edit" ng-click="vm.addOrUpdateWallet(false, wallet)"><i
+                                                class="fa fa-pencil"></i></button>
+                                        <button type="button" class="btn btn-danger btn-xs" title="Delete" ng-click="vm.deleteWallet(wallet.id)"><i
+                                                class="fa fa-close"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <div st-pagination="" st-template="app/pages/components/smart-table/pagination.html" st-items-by-page="vm.tablePageSize" st-displayed-pages="5"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-primary btn-with-icon pull-right m-t-md mr5" ng-click="vm.addOrUpdateWallet(true, null)">
+                                    <i class="fa fa-plus"></i>Add New Wallet
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

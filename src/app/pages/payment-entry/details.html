@@ -1,0 +1,161 @@
+<div ba-panel ba-panel-class="profile-page">
+    <div ng-if="!vm.paymentEntry.paymentToken" class="panel-content">
+         ¯\_(ツ)_/¯ Payment not found!<br>
+        <small><span class="text-muted">With payment token</span> {{::vm.paymentToken}}</small>
+    </div>
+    <div ng-if="vm.paymentEntry.paymentToken" class="panel-content">
+        <h3 class="with-line">General Information
+            <span>
+                <button type="button" ng-click="vm.reload()" class="btn btn-primary btn-xs" style="margin-right: 10px;"><span class="fa fa-refresh"></span></button>
+            </span>
+        </h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-group row clearfix">
+                        <label for="inputFirstName" class="col-sm-3 control-label">Payment Token</label>
+                        <div class="col-sm-9"><p class="form-control-static">{{::vm.paymentEntry.paymentToken}}</div>
+                    </div>
+                    <div class="form-group row clearfix">
+                        <label for="inputLastName" class="col-sm-3 control-label">Payment Status</label>
+                        <div class="col-sm-9"><p class="form-control-static">{{vm.paymentEntry.paymentStatus | displayPaymentStatus}}</div>
+                    </div>
+                    <div class="form-group row clearfix">
+                        <label for="inputLastName" class="col-sm-3 control-label">Date requested</label>
+                        <div class="col-sm-9"><p class="form-control-static">{{::vm.paymentEntry.requestDate | date}}</div>
+                    </div>
+                    <div class="form-group row clearfix">
+                        <label for="inputLastName" class="col-sm-3 control-label">Date fulfilled</label>
+                        <div class="col-sm-9"><p class="form-control-static">{{(vm.paymentEntry.fulfillDate | date) || 'Not fulfilled'}}</div>
+                    </div>
+                    <div class="form-group row clearfix">
+                        <label for="inputFirstName" class="col-sm-3 control-label">Total Amount</label>
+                        <div class="col-sm-9"><p class="form-control-static">{{(vm.paymentEntry.amount.total | currency) || 'Not set'}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="with-line">Merchant Information</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row clearfix">
+                    <label class="col-sm-3 control-label">Merchant name</label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">{{::vm.paymentEntry.merchantProfile.name || 'Not set'}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row clearfix">
+                    <label class="col-sm-3 control-label">Merchant Code</label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">{{::vm.paymentEntry.merchantProfile.merchantCode || 'Not set'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="with-line">Subscriber Information</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row clearfix">
+                    <label class="col-sm-3 control-label">Subscriber Mobtel</label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">{{::vm.paymentEntry.subscriberMobTel|| 'Not set'}}
+                    </div>
+                </div>
+                <div class="form-group row clearfix">
+                    <label class="col-sm-3 control-label">Subscriber IP Address</label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">{{::vm.paymentEntry.subscriberIpAddress || 'Not set'}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row clearfix">
+                    <label class="col-sm-3 control-label">Subscriber Wallet</label>
+                    <div class="col-sm-9">
+                        <p class="form-control-static">{{::vm.paymentEntry.subscriberWalletId || 'Not set'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="with-line">Order Information</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name
+              <th>Description
+              <th>SKU
+              <th>Qty
+              <th>Unit Price
+              <th>Tax
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in vm.paymentEntry.itemList.items">
+              <td>{{item.name}}
+              <td>{{item.description}}
+              <td>{{item.sku}}
+              <td>{{item.quantity}}
+              <td>{{item.unitPrice | currency: item.currency + ' '}}
+              <td>{{item.tax | currency: item.currency + ' '}}
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="with-line">Payment Entry History</h3>
+        <table class="table table-striped">
+            <thead>
+                <th></th>
+                <th>
+                    Code
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Payment Status
+                </th>
+                <th>
+                    Payment Result
+                </th>
+                <th>
+                    Request
+                </th>
+                <th>
+                    Response
+                </th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="audit in vm.paymentAudit">
+                    <td></td>
+                    <td>
+                      <div>{{audit.auditCode | displayAuditCode}}</div>
+                      <small ng-if="audit.shortMessage" class="text-muted"><div style="line-height: normal;">{{audit.shortMessage}}</div></small>
+                    </td>
+                    <td>{{audit.auditDate | date: 'MMM d, yyyy H:mm:ss a'}}</td>
+                    <td>{{(audit.paymentStatus | displayPaymentStatus) || "Not fulfilled"}}</td>
+                    <td>{{(audit.paymentResult | displayPaymentResult) || "Not fulfilled"}}</td>
+                    <td>
+                        <div class="json-data mt10"><pre ng-class="{'partial': !audit.expandRequest, 'expanded': audit.expandRequest}">{{audit.request || "Not fulfilled"}}</pre></div>
+                        <a href="javascript:;" ng-click="audit.expandRequest = !audit.expandRequest">
+                          <small ng-if="!audit.expandRequest">Expand</small>
+                          <small ng-if="audit.expandRequest">Collapse</small>
+                        </a>
+                    </td>
+                    <td>
+                        <div class="json-data mt10"><pre ng-class="{'partial': !audit.expandResponse, 'expanded': audit.expandResponse}">{{audit.response || "Not fulfilled"}}</pre></div>
+                        <a href="javascript:;" ng-click="audit.expandResponse = !audit.expandResponse">
+                          <small ng-if="!audit.expandResponse">Expand</small>
+                          <small ng-if="audit.expandResponse">Collapse</small>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" ng-click="vm.reload()" class="btn btn-primary btn-xs pull-right" style="margin-right: 10px;">Reload</button>
+    </div>
+</div>

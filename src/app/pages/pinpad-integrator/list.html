@@ -1,0 +1,66 @@
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-title="Integrator Profile List" ba-panel-class="with-scroll">
+                <div class="horizontal-scroll">
+                    <button type="button" class="btn btn-primary btn-xs pull-right" ui-sref="pinpad-integrator-add">Add Integrator</button>
+                    <button type="button" ng-click="vm.getIntegratorProfileList()" class="btn btn-primary btn-xs pull-right refresh-sm"><span class="fa fa-refresh"></span></button>
+                    <div class="form-group select-page-size-wrap ">
+                    </div>
+                    <table class="table" st-pipe="vm.getIntegratorProfileList" st-table="vm.integratorProfiles">
+                        <thead>
+                        <tr class="sortable">
+                            <th class="table-id" st-sort="integratorCode" st-sort-default="true">Integrator Code</th>
+                            <th st-sort="name">Integrator Name</th>
+                            <th st-sort="createdDate">Created Date</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th><input st-search="integratorCode" placeholder="Integrator Code" class="input-sm form-control search-input"
+                                       type="search"/></th>
+                            <th><input st-search="name" placeholder="Search Integrator Name" class="input-sm form-control search-input"
+                                       type="search"/></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="profile in vm.integratorProfiles">
+                            <td class="table-id">
+                                <div>{{profile.integratorCode}}</div>
+                                <div ng-if="profile.active" class="label label-success">Active</div>
+                                <div ng-if="!profile.active" class="label label-warning">Inactive</div>
+                            </td>
+                            <td>
+                                {{profile.name}}
+                            </td>
+                            <td style="font-size: 0.9em;">
+                                {{profile.createdDate | date}}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-xs" ui-sref="pinpad-integrator-view({integratorId: profile.id})">View details</button>
+                                <button type="button" class="btn btn-danger btn-xs" ng-click="vm.delete(profile)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <div st-pagination="" st-template="app/pages/components/smart-table/pagination.html" st-items-by-page="vm.tablePageSize" st-displayed-pages="5"></div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="text-muted">Showing {{vm.integratorProfiles.length}} of {{vm.totalElements}}</div>
+                <label class="pull-right" style="margin-right: 10px;">
+                    <select class="form-control selectpicker show-tick" style="height: 30px; line-height: 14px;" title="Rows on page" selectpicker
+                            ng-model="vm.tablePageSize" ng-options="i for i in [1,5,10,15,20,25]">
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

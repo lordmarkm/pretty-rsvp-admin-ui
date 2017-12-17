@@ -1,0 +1,40 @@
+<div class="modal-content">
+    <div class="modal-header bg-success" ng-if="isAdd == true">
+        <i class="fa fa-plus"></i><span> Add Settings</span>
+    </div>
+    <div class="modal-header bg-success" ng-if="!isAdd">
+        <i class="fa fa-pencil"></i><span> Edit Settings</span>
+    </div>
+    <div style="padding: 10px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group row clearfix">
+                    <label for="code" class="col-sm-4 control-label">
+                        <span class="required">Code</span>
+                    </label>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="code" placeholder=""
+                               ng-model="settings.code" required>
+                    </div>
+                </div>
+                <div class="form-group row clearfix">
+                    <label for="value" class="col-sm-4 control-label">
+                        <span class="required">Value</span>
+                    </label>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="value" placeholder=""
+                               ng-model="settings.value" required>
+                    </div>
+                </div>
+                <div class="form-group row clearfix">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-success btn-sm btn-with-icon pull-right" ng-click="saveSettings()" title="Add"><i
+                                class="fa fa-save"></i> Save Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

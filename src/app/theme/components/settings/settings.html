@@ -1,0 +1,21 @@
+<div class="slide-out-div">
+    <a class="handle" href="">
+        <i style="" class="fa fa-cog fa-spin fa-4x fa-fw"></i>
+    </a>
+    <h4>Theme Color</h4>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12 col-xsm-12">
+            <h5>Top nav</h5>
+            <div class="box" ng-repeat="item in colorsTopNav" ng-class="item.theme" ng-click="app.settings.navbarHeaderColor=item.theme;check(item, colorsTopNav)">
+                <i ng-if="item.active" class="ion-checkmark-round"></i>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xsm-12 m-t-md div2">
+            <h5>Side bar</h5>
+            <div class="box" ng-repeat="item1 in colorsSideBar" ng-class="item1.theme" ng-click="app.settings.asideColor=item1.theme;check(item1, colorsSideBar)">
+                <i ng-if="item1.active" class="ion-checkmark-round"></i>
+            </div>
+        </div>
+    </div>
+</div>

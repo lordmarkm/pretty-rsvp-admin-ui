@@ -1,0 +1,33 @@
+<div class="page-top clearfix {{app.settings.navbarHeaderColor}}" scroll-position="scrolled" max-height="50" ng-class="{'scrolled': scrolled, }">
+
+    <a href="#/dashboard" class="navbar-logo clearfix">{{::app.name}}</a>
+    <a href class="collapse-menu-link" ba-sidebar-toggle-menu ng-click="app.settings.asideFolded = !app.settings.asideFolded">
+        <i class="fa {{app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}} fa-fw"></i>
+    </a>
+
+
+    <div class="search">
+        <input id="searchInput" type="text" placeholder="Search for...">
+        <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
+    </div>
+
+    <div class="user-profile clearfix">
+        <div class="al-user-profile" uib-dropdown>
+            <a uib-dropdown-toggle class="profile-toggle-link">
+                <img ng-src="assets/img/app/profile/Nasta.png" src="assets/img/app/profile/Nasta.png">
+                <span class="text-white p-l-sm">{{vm.user.name}}</span>
+                <i class="ion-chevron-down text-white"></i>
+            </a>
+            <ul class="top-dropdown-menu profile-dropdown" uib-dropdown-menu>
+                <li></li>
+                <li><a href="#/profile"><i class="fa fa-user"></i>Profile</a></li>
+                <li><a href="#/mail/inbox"><i class="fa fa-envelope"></i>Inbox</a></li>
+                <li><a href><i class="fa fa-cog"></i>Settings</a></li>
+                <hr class="m-t-md m-b-sm">
+                <li><a href="/api/logout" class="signout"><i class="fa fa-power-off"></i>Sign out</a></li>
+            </ul>
+        </div>
+        <msg-center></msg-center>
+    </div>
+
+</div>

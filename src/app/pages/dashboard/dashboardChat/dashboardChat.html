@@ -1,0 +1,29 @@
+<div class="panel chat">
+    <div class="panel-heading"><i class=""></i> CHAT</div>
+    <div class="panel-body">
+        <ul>
+            <li ng-repeat="msg in data" class="{{::msg.position}} clearfix">
+                <span class="chat-img pull-{{::msg.position}}">
+									<img ng-src="{{::msg.image}}" alt="User Avatar" class="photo-icon" />
+								</span>
+                <div class="chat-body clearfix">
+                    <div class="header">
+                        <strong class="primary-font">{{::msg.name}}</strong> <small class="text-muted">{{msg.ago}}</small>
+                    </div>
+                    <p class="chat-message">
+                        {{::msg.message}}
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="panel-footer">
+        <div class="input-group">
+            <input id="btn-input" type="text" class="form-control input-md" placeholder="Type your message here..." ng-model="message" />
+            <span class="input-group-btn">
+								<button class="btn btn-primary btn-md" id="btn-chat" ng-click="chat(message)">Send</button>
+							</span>
+        </div>
+    </div>
+</div>

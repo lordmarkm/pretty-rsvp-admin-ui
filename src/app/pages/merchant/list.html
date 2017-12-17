@@ -1,0 +1,78 @@
+<div class="widgets">
+  <div class="row">
+      <div class="col-md-12">
+        <div ba-panel ba-panel-title="Merchant Profile List" ba-panel-class="with-scroll">
+          <div class="horizontal-scroll">
+            <button type="button" class="btn btn-primary btn-xs pull-right" style="margin-right: 10px;" ui-sref="merchant-add()">Add Merchant</button>
+            <button type="button" ng-click="vm.getMerchants()" class="btn btn-primary btn-xs refresh-sm pull-right" style="margin-right: 10px;"><span class="fa fa-refresh"></span></button>
+            <div class="form-group select-page-size-wrap ">
+            </div>
+            <table class="table" style="table-layout: fixed" st-pipe="vm.getMerchants" st-table="vm.merchants">
+              <thead>
+              <tr class="sortable">
+                <th width="20%" style="text-align: left" st-sort="merchantCode" st-sort-default="true">Code</th>
+                <th width="30%" st-sort="name">Merchant Name</th>
+                <th width="30%">Details</th>
+                <th width="20%"></th>
+              </tr>
+              <tr>
+                <th><input st-search="code" placeholder="Code" class="input-sm form-control search-input"
+                           type="search"/></th>
+                <th><input st-search="name" placeholder="Search Merchant Name" class="input-sm form-control search-input"
+                           type="search"/></th>
+                <th></th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="merchant in vm.merchants">
+                <td class="table-id">
+                  <div>{{merchant.merchantCode}}</div>
+                  <div ng-if="merchant.active" class="label label-success">Active</div>
+                  <div ng-if="!merchant.active" class="label label-warning">Inactive</div>
+                </td>
+                <td>
+                    {{merchant.name}}
+                </td>
+                <td>
+                  <ul style="list-style: none; padding-left: 0px">
+                    <li><small><span class="text-muted">Created</span> {{merchant.createdDate | date}}</small></li>
+                    <li><small><span class="text-muted">Updated</span> {{merchant.updatedDate | date}}</small></li>
+                    <li>
+                      <div ng-if="merchant.pinpadEnabled" class="label label-success">Pinpad Enabled</div>
+                      <div ng-if="!merchant.pinpadEnabled" class="label label-danger">Pinpad Disabled</div>
+                    </li>
+                    <li>
+                      <div ng-if="merchant.otpEnabled" class="label label-success">OTP Enabled</div>
+                      <div ng-if="!merchant.otpEnabled" class="label label-danger">OTP Disabled</div>
+                    </li>
+                  </ul>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-xs" ui-sref="merchant-details({merchantCode: merchant.merchantCode})">
+                    View Details
+                  </button>
+                  <button type="button" ng-click="vm.deleteMerchant(merchant)" class="btn btn-danger btn-xs refresh-sm" style="margin-right: 10px;"><span class="fa fa-trash"></span></button>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="7" class="text-center">
+                  <div st-pagination="" st-template="app/pages/components/smart-table/pagination.html" st-items-by-page="vm.tablePageSize" st-displayed-pages="5"></div>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="text-muted">Showing {{vm.merchants.length}} of {{vm.totalElements}}</div>
+          <button type="button" class="btn btn-primary btn-xs pull-right" ng-click="vm.exportPolicies()">Export to Excel</button>
+          <label class="pull-right" style="margin-right: 10px;">
+            <select class="form-control selectpicker show-tick" style="height: 30px; line-height: 14px;" title="Rows on page" selectpicker
+                    ng-model="vm.tablePageSize" ng-options="i for i in [1,5,10,15,20,25]">
+            </select>
+          </label>
+      </div>
+    </div>
+  </div>
+</div>

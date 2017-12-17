@@ -1,0 +1,144 @@
+<div ba-panel ba-panel-title="Integrator Profile Details" ba-panel-class="with-scroll">
+    <div ng-if="!vm.integratorProfile.id" class="panel-content">
+        ¯\_(ツ)_/¯ Integrator Profile not found!<br>
+        <small><span class="text-muted">With Integrator Profile ID</span> {{::vm.profileId}}</small>
+    </div>
+    <div ng-if="vm.integratorProfile.id" class="panel-content">
+        <div class="form-group">
+            <form ng-submit="vm.updateProfile()">
+                <h3 class="with-line">General Information</h3>
+                <div class="col-md-12">
+                    <div class="col-md-7">
+                        <div class="col-md-12">
+                            <div class="form-group row clearfix">
+                                <label class="col-sm-3">Active</label>
+                                <div class="col-xs-4">
+                                    <ba-switcher on="YES" off="NO" switcher-style="primary" switcher-value="vm.integratorProfile.active"></ba-switcher>
+                                </div>
+                            </div>
+                            <div class="form-group row clearfix">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">Integrator Code</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" ng-model="vm.integratorProfile.integratorCode" required>
+                                    <small class="text-muted">Must be unique</small>
+                                </div>
+                            </div>
+                            <div class="form-group row clearfix">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">Integrator Name</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" ng-model="vm.integratorProfile.name" required>
+                                </div>
+                            </div>
+                            <div class="form-group row clearfix">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">Password</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" ng-model="vm.integratorProfile.password" required>
+                                </div>
+                            </div>
+                            <div class="form-group row clearfix">
+                                <label class="col-sm-3 control-label">
+                                <span class="required">
+                                    Token Validity
+                                </span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" ng-model="vm.integratorProfile.tokenValidity" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-12">
+                            <div class="form-group row clearfix">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">Host</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" ng-model="vm.integratorProfile.integratorNotification.host" required>
+                                </div>
+                            </div>
+                            <div class="form-group row clearfix">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">Port</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" ng-model="vm.integratorProfile.integratorNotification.port" required>
+                                </div>
+                            </div>
+                            <div class="form-group row clearfix">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required">Path</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" ng-model="vm.integratorProfile.integratorNotification.path" required>
+                                </div>
+                            </div>
+                            <div class="form-group row clearfix">
+                                <label class="col-sm-3 control-label">
+                                    <span>Salt</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <p class="form-control">{{vm.integratorProfile.integratorSalt}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="with-line">Integrator Settings</h3>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group row clearfix">
+                            <div class="col-sm-12">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label class="col-sm-8">{{vm.settings.resendOtp.code}}</label>
+                                            <div class="col-sm-4">
+                                                <input class="form-control" type="number"
+                                                       ng-model="vm.settings.resendOtp.value" min="3" required>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="with-line">Integrator Permissions</h3>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="form-group row clearfix">
+                            <div class="col-sm-12">
+                                <table>
+                                    <tr ng-repeat="permission in vm.permissions">
+                                        <td>
+                                            <label class="col-sm-8">{{permission.label}}</label>
+                                            <div class="col-sm-4">
+                                                <ba-switcher switcher-style="primary" on="YES" off="NO"
+                                                             switcher-value="permission.active"></ba-switcher>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary btn-with-icon pull-right">
+                            <i class="ion-android-checkmark-circle"></i>Update Integrator
+                        </button>
+                        <button type="button" ng-click="vm.reload()" class="btn btn-primary pull-right refresh"><span class="fa fa-refresh"></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

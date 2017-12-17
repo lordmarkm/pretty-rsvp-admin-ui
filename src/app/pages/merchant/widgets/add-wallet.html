@@ -1,0 +1,58 @@
+<div class="modal-content">
+    <div class="modal-header bg-success" ng-if="isAdd == true">
+        <i class="fa fa-plus"></i><span> Add New Wallet</span>
+    </div>
+    <div class="modal-header bg-success" ng-if="!isAdd">
+        <i class="fa fa-pencil"></i><span> Edit Wallet</span>
+    </div>
+    <div style="padding: 10px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group row clearfix" ng-if="!isAdd">
+                    <label class="col-sm-4 control-label">Active</label>
+
+                    <div class="col-sm-8">
+                        <ba-switcher switcher-style="primary"
+                                     switcher-value="wallet.active"></ba-switcher>
+                    </div>
+                </div>
+                <div class="form-group row clearfix">
+                    <label for="walletId" class="col-sm-4 control-label">
+                        <span class="required">Wallet ID</span>
+                    </label>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="walletId" placeholder=""
+                               ng-model="wallet.walletId" required>
+                    </div>
+                </div>
+                <div class="form-group row clearfix">
+                    <label for="walletName" class="col-sm-4 control-label">
+                        <span class="required">Wallet Name</span>
+                    </label>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="walletName" placeholder=""
+                               ng-model="wallet.walletName" required>
+                    </div>
+                </div>
+                <div class="form-group row clearfix">
+                    <label for="walletType" class="col-sm-4 control-label">
+                        <span class="required">Wallet Type</span>
+                    </label>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="walletType" placeholder=""
+                               ng-model="wallet.walletType" required>
+                    </div>
+                </div>
+                <div class="form-group row clearfix">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-success btn-sm btn-with-icon pull-right" ng-click="saveWallet()" title="Add"><i
+                                class="fa fa-save"></i> Save Wallet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
