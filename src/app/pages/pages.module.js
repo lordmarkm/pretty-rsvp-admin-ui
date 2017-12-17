@@ -4,9 +4,9 @@
     angular.module('OwlAdmin.pages', [
         'OwlAdmin.pages.dashboard',
       /* Added by mark */
-        'OwlAdmin.pages.merchant',
-        'OwlAdmin.pages.payment-entry',
-        'OwlAdmin.pages.pinpad-integrator'
+        //'OwlAdmin.pages.merchant',
+        //'OwlAdmin.pages.payment-entry',
+        //'OwlAdmin.pages.pinpad-integrator'
     ])
     //Todo: Add legit permissions
     /* initially perceived permissions, can be changed */

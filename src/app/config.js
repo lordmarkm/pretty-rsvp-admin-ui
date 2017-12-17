@@ -52,8 +52,9 @@ angular.module('OwlAdmin')
           events: true,
           modules: MODULE_CONFIG
       });
-  }])
+  }]);
   //security config
+  /*
   .run(['$state', '$rootScope', 'authService', 'sweetAlert', function($state, $rootScope, authService, sweetAlert) {
     //allow isAuthorized(access) in all html templates
     $rootScope.isAuthorized = function (required) {
@@ -76,3 +77,4 @@ angular.module('OwlAdmin')
       });
     });
   }]);
+  */
